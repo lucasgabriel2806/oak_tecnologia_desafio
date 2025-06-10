@@ -23,7 +23,7 @@
     <h1>Listagem de produtos</h1>
 
     <!-- Container da lista de produtos -->
-    <div class="">
+    <div class="containerListaProdutos">
 
 
 
@@ -32,9 +32,25 @@
     <!-- Botão que leva para tela de cadastro -->
     <div>
 
-        <a href="cadastro.html" class="bg-[green] p-3 rounded">Cadastrar</a>
+        <a href="#" onclick="testeCad()" class="bg-[green] p-3 rounded">Cadastrar</a>
 
     </div>
+
+    <script>
+
+        function testeCad() {
+
+            let nome = "produto-teste1";
+
+            const listaProdutos = document.createElement("div");
+
+            const texto = document.createTextNode("This is new.");
+            
+            listaProdutos.appendChild(texto);
+
+        }
+
+    </script>
     
 </body>
 

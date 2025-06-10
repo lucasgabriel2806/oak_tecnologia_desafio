@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Produtos</title>
+</head>
+<body>
+  <h1>Cadastro de Produto</h1>
+
+  <label>Nome:</label>
+  <input type="text" id="nome"><br>
+
+  <label>Preço:</label>
+  <input type="number" id="preco" step="0.01"><br>
+
+  <button onclick="cadastrarProduto()">Cadastrar</button>
+  <br><br>
+  <a href="listagem.html">Ir para a Listagem</a>
+
+  <script>
+    function cadastrarProduto() {
+      const nome = document.getElementById("nome").value;
+      const preco = parseFloat(document.getElementById("preco").value);
+
+      if (nome === "" || isNaN(preco)) {
+        alert("Preencha todos os campos corretamente.");
+        return;
+      }
+
+      const novoProduto = { nome, preco };
+
+      let lista = JSON.parse(localStorage.getItem("produtos")) || [];
+      lista.push(novoProduto);
+      localStorage.setItem("produtos", JSON.stringify(lista));
+
+      alert("Produto cadastrado com sucesso!");
+
+      // Limpar campos
+      document.getElementById("nome").value = "";
+      document.getElementById("preco").value = "";
+    }
+  </script>
+</body>
+</html>

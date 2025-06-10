@@ -8,7 +8,27 @@ let inputDesc = document.getElementById("inputDesc");
 
 let inputValor = document.getElementById("inputValor");
 
-let nomeProduto, descProduto, valorProduto;
+let nomeProduto;
+
+// Array que armazena todos os produtos cadastrados
+let listaDeProdutos = [];
+
+// Simulando o cadastro de um produto
+function cadastrarProduto(nome, preco) {
+  let produto = {
+    nome: nome,
+    preco: preco
+  };
+
+  listaDeProdutos.push(produto);
+}
+
+// Cadastro de dois produtos
+cadastrarProduto("Camisa", 49.90);
+cadastrarProduto("Tênis", 129.99);
+
+console.log(listaDeProdutos);
+
 
 function cadastrar() {
 
@@ -27,15 +47,19 @@ function cadastrar() {
 
     } else {
 
-        nomeProduto = inputNome.value;
+        /** Armazenando através da session */
 
-        descProduto = inputDesc.value;
+        sessionStorage.setItem(nomeProduto, inputNome.value);
 
-        valorProduto = inputValor.value;
+        alert(nomeProduto);
 
-        alert("Cadastrando produto!");
+        sessionStorage.setItem('descProduto', inputDesc.value);
+
+        sessionStorage.setItem('valorProduto', inputValor.value);
 
         window.location.href = "../listagem.html";
+
+        alert("Produto cadastrado!");
 
     }
 

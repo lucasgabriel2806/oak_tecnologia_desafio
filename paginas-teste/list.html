@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Produtos</title>
+</head>
+<body>
+  <h1>Produtos Cadastrados</h1>
+  <div id="listaProdutos"></div>
+  <br>
+  <a href="cadastro.html">Voltar para Cadastro</a>
+
+  <script>
+    function mostrarProdutos() {
+      const lista = JSON.parse(localStorage.getItem("produtos")) || [];
+      const div = document.getElementById("listaProdutos");
+
+      if (lista.length === 0) {
+        div.innerHTML = "<p>Nenhum produto cadastrado.</p>";
+        return;
+      }
+
+      div.innerHTML = "";
+      lista.forEach((produto, index) => {
+        div.innerHTML += `
+          <div>
+            <strong>${produto.nome}</strong> - R$ ${produto.preco.toFixed(2)}
+          </div>
+        `;
+      });
+    }
+
+    window.onload = mostrarProdutos;
+  </script>
+</body>
+</html>

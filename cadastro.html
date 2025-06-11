@@ -4,59 +4,118 @@
 
 <head>
 
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Produtos</title>
 
-    <title>OAK Tecnologia | Desafio</title>
+  <!-- Importando tailwind via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <!-- Tailwind CSS CLI -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Importando intellisense tailwind (extensão) -->
+  <style>
 
-    <!-- CSS Externo -->
-    <link rel="stylesheet" href="css/style.css">
+    @import "tailwindcss";
+
+  </style>
 
 </head>
 
-<body>
+<body class="flex flex-col">
 
-    <h1 class="text-center">Cadastro de Produto</h1>
+  <h1 class="text-2xl text-center mt-5 mb-5">Cadastro de Produto</h1>
 
-    <form>
+  <div class="w-[500px] mx-auto border-2 p-5 rounded-2xl flex flex-col">
+      
+      <label>Nome:</label>
+
+      <input type="text" id="nome" class="border-2 rounded">
+      
+      <br>
+
+      <label>Preço:</label>
+
+      <input type="number" id="preco" step="0.01"class="border-2 rounded">
+      
+      <br>
+
+      <label>Descrição:</label>
+
+      <textarea id="descricao" rows="4" cols="30" class="border-2 rounded"></textarea>
+      
+      <br>
+
+      <label>Disponível para venda:</label>
+
+      <select id="disponivel" class="border-2 rounded">
+
+        <option value="sim">Sim</option>
+
+        <option value="nao">Não</option>
+
+      </select>
+
+      <button class="bg-green-500 w-50 self-center mt-5 mb-5 rounded-2xl p-3" onclick="cadastrarProduto()">Cadastrar</button>
+      
+  </div>
+
+  <a href="listagem.html" class="bg-green-500 w-50 self-center text-center mt-5 mb-5 rounded-2xl p-3">Ir para a Listagem</a>
+
+  <br>  
+
+  <script>
+
+    function cadastrarProduto() {
+
+      const nome = document.getElementById("nome").value.trim();
+
+      const preco = parseFloat(document.getElementById("preco").value);
+
+      const descricao = document.getElementById("descricao").value.trim();
+
+      const disponivel = document.getElementById("disponivel").value;
+
+      if (!nome || isNaN(preco)) {
+
+        alert("Preencha o nome e o preço corretamente.");
+
+        return;
+
+      }
+
+      const novoProduto = {
         
-        <label for="">Nome</label>
+        nome,
 
-        <br>
+        preco,
 
-        <input type="text" id="inputNome" placeholder="" class="border rounded mb-8">
+        descricao,
 
-        <br>
+        disponivel
 
-        <label for="">Descrição</label>
+      };
 
-        <br>
+      let lista = JSON.parse(localStorage.getItem("produtos")) || [];
 
-        <textarea name="" id="inputDesc" class="border rounded mb-8"></textarea>
+      lista.push(novoProduto);
 
-        <br>
+      localStorage.setItem("produtos", JSON.stringify(lista));
 
-        <label for="">Valor</label>
+      alert("Produto cadastrado com sucesso!");
 
-        <br>
+      window.location.href = './listagem.html';
 
-        <input type="number" name="" id="inputValor" class="border rounded">
+      // Limpar campos
+      document.getElementById("nome").value = "";
 
-        <br>
+      document.getElementById("preco").value = "";
 
-        <input type="radio" name="" id="">
+      document.getElementById("descricao").value = "";
 
-        <br>
+      document.getElementById("disponivel").value = "sim";
 
-        <input onclick="cadastrar()" type="submit" id="btnSubmit" value="Cadastrar" class="border rounded p-2 bg-green-400">
+    }
 
-    </form>
-
-    <script src="js/script.js"></script>
+  </script>
 
 </body>
 
